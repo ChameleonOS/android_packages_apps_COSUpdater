@@ -83,7 +83,7 @@ public class UpdateCheckService extends Service {
     @Override
     public void onCreate() {
         // Get the System Mod string
-        mSystemMod = TESTING_DOWNLOAD ? "cmtestdevice" : SysUtils.getSystemProperty(Customization.BOARD);
+        mSystemMod = TESTING_DOWNLOAD ? "costestdevice" : SysUtils.getSystemProperty(Customization.BOARD);
         if (mSystemMod == null) {
             Log.i(TAG, "Unable to determine System's Mod version. Updater will show all available updates");
         }
@@ -185,7 +185,7 @@ public class UpdateCheckService extends Service {
 
         // Store the last update check time and ensure boot check completed is true
         Date d = new Date();
-        SharedPreferences prefs = getSharedPreferences("CMUpdate", Context.MODE_MULTI_PROCESS);
+        SharedPreferences prefs = getSharedPreferences("COSUpdate", Context.MODE_MULTI_PROCESS);
         prefs.edit().putLong(Constants.LAST_UPDATE_CHECK_PREF, d.getTime()).apply();
         prefs.edit().putBoolean(Constants.BOOT_CHECK_COMPLETED, true).apply();
 
@@ -246,7 +246,7 @@ public class UpdateCheckService extends Service {
         mCurrentBuildDate = Integer.valueOf(SysUtils.getSystemProperty(Customization.BUILD_DATE));
 
         // Get the type of update we should check for
-        SharedPreferences prefs = getSharedPreferences("CMUpdate", Context.MODE_MULTI_PROCESS);
+        SharedPreferences prefs = getSharedPreferences("COSUpdate", Context.MODE_MULTI_PROCESS);
         int updateType = prefs.getInt(Constants.UPDATE_TYPE_PREF, 0);
         if (updateType == 0) {
             mShowAllRomUpdates = false;

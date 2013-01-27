@@ -119,7 +119,7 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
         mUpdatesList = (PreferenceCategory) prefSet.findPreference(UPDATES_CATEGORY);
 
         // Load the stored preference data
-        mPrefs = getSharedPreferences("CMUpdate", Context.MODE_MULTI_PROCESS);
+        mPrefs = getSharedPreferences("COSUpdate", Context.MODE_MULTI_PROCESS);
         mUpdateCheck = (ListPreference) findPreference(Constants.UPDATE_CHECK_PREF);
         if (mUpdateCheck != null) {
             int check = mPrefs.getInt(Constants.UPDATE_CHECK_PREF, Constants.UPDATE_FREQ_WEEKLY);
@@ -505,13 +505,13 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
 
         // Read existing Updates
         List<String> existingFilenames = null;
-        mUpdateFolder = new File(Environment.getExternalStorageDirectory() + "/cmupdater");
+        mUpdateFolder = new File(Environment.getExternalStorageDirectory() + "/" + Constants.UPDATES_FOLDER);
         FilenameFilter f = new UpdateFilter(".zip");
         File[] files = mUpdateFolder.listFiles(f);
 
         // If Folder Exists and Updates are present(with md5files)
         if (mUpdateFolder.exists() && mUpdateFolder.isDirectory() && files != null && files.length > 0) {
-            //To show only the Filename. Otherwise the whole Path with /sdcard/cm-updates will be shown
+            //To show only the Filename. Otherwise the whole Path with /sdcard/cosupdates will be shown
             existingFilenames = new ArrayList<String>();
             for (File file : files) {
                 if (file.isFile()) {
@@ -611,7 +611,7 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
             int style;
 
             // Convert the systemRom name to the associated filename
-            String installedZip = "cm-" + mSystemRom.toString() + ".zip";
+            String installedZip = "cos-" + mSystemRom.toString() + ".zip";
 
             // Add the server based updates
             // Since these will almost always be newer, they should appear at the top
@@ -830,7 +830,7 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
 
                         // See if backups are enabled and add the nandroid flag
                         /* TODO: add this back once we have a way of doing backups that is not recovery specific
-                        SharedPreferences prefs = getSharedPreferences("CMUpdate", Context.MODE_MULTI_PROCESS);
+                        SharedPreferences prefs = getSharedPreferences("COSUpdate", Context.MODE_MULTI_PROCESS);
                         if (prefs.getBoolean(Constants.BACKUP_PREF, true)) {
                             os.write("echo '--nandroid'  >> /cache/recovery/command\n".getBytes());
                         }
@@ -882,7 +882,7 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
             if (v.getPath().equals(primaryStoragePath)) {
                 /* This is the primary storage, where we stored the update file
                  *
-                 * For CM10, a non-removable storage (partition or FUSE)
+                 * For COS, a non-removable storage (partition or FUSE)
                  * will always be primary. But we have older recoveries out there 
                  * in which /sdcard is the microSD, and the internal partition is 
                  * mounted at /emmc.

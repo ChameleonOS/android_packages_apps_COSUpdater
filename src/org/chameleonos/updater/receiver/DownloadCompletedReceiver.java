@@ -32,8 +32,8 @@ public class DownloadCompletedReceiver extends BroadcastReceiver{
     @Override
     public void onReceive(Context context, Intent intent) {
 
-        // Get the ID of the currently running CMUpdater download and the one just finished
-        SharedPreferences prefs = context.getSharedPreferences("CMUpdate", Context.MODE_MULTI_PROCESS);
+        // Get the ID of the currently running COSUpdater download and the one just finished
+        SharedPreferences prefs = context.getSharedPreferences("COSUpdate", Context.MODE_MULTI_PROCESS);
         long enqueue = prefs.getLong(Constants.DOWNLOAD_ID, -1);
         long id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -2);
 

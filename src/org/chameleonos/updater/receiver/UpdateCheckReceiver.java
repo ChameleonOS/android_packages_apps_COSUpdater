@@ -29,7 +29,7 @@ public class UpdateCheckReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         // Load the required settings from preferences
-        SharedPreferences prefs = context.getSharedPreferences("CMUpdate", Context.MODE_MULTI_PROCESS);
+        SharedPreferences prefs = context.getSharedPreferences("COSUpdate", Context.MODE_MULTI_PROCESS);
         int updateFrequency = prefs.getInt(Constants.UPDATE_CHECK_PREF, Constants.UPDATE_FREQ_WEEKLY);
 
         // Check if we are set to manual updates and don't do anything
@@ -72,7 +72,7 @@ public class UpdateCheckReceiver extends BroadcastReceiver {
 
     private void scheduleUpdateService(Context context, int updateFrequency) {
         // Load the required settings from preferences
-        SharedPreferences prefs = context.getSharedPreferences("CMUpdate", Context.MODE_MULTI_PROCESS);
+        SharedPreferences prefs = context.getSharedPreferences("COSUpdate", Context.MODE_MULTI_PROCESS);
         Date lastCheck = new Date(prefs.getLong(Constants.LAST_UPDATE_CHECK_PREF, 0));
 
         // Get the intent ready
