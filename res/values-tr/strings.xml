@@ -9,7 +9,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
     <!-- General strings -->
-    <string name="app_name">CM Güncellemeleri</string>
+    <string name="app_name">ChaOS Güncellemeleri</string>
     <string name="unknown">Bilinmiyor</string>
 
     <!-- Menu and dialog box strings -->

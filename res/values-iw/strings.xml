@@ -9,7 +9,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
     <!-- General strings -->
-    <string name="app_name">מעדכן CM</string>
+    <string name="app_name">מעדכן ChaOS</string>
     <string name="display_name">עדכונים</string>
     <string name="unknown">לא ידוע</string>
 

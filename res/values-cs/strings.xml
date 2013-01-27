@@ -7,7 +7,7 @@
      or at https://www.gnu.org/licenses/gpl-2.0.txt
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="app_name">Aktualizace CM</string>
+    <string name="app_name">Aktualizace ChaOS</string>
     <string name="display_name">Aktualizace</string>
     <string name="unknown">Neznámý</string>
 

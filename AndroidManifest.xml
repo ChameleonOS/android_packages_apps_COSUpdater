@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.cyanogenmod.updater"
+    package="org.chameleonos.updater"
     android:versionCode="2"
     android:versionName="2.0" >
 
@@ -36,28 +36,28 @@
             </intent-filter>
         </activity>
 
-        <service android:name="com.cyanogenmod.updater.service.UpdateCheckService"
-                 android:process="com.cyanogenmod.updater.updater.service.UpdateCheckService">
+        <service android:name="org.chameleonos.updater.service.UpdateCheckService"
+                 android:process="org.chameleonos.updater.updater.service.UpdateCheckService">
             <intent-filter>
-                <action android:name="com.cyanogenmod.updater.interfaces.IUpdateCheckService"/>
+                <action android:name="org.chameleonos.updater.interfaces.IUpdateCheckService"/>
             </intent-filter>
         </service>
 
-        <receiver android:name="com.cyanogenmod.updater.receiver.UpdateCheckReceiver">
+        <receiver android:name="org.chameleonos.updater.receiver.UpdateCheckReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
                 <category android:name="android.intent.category.HOME"/>
             </intent-filter>
         </receiver>
-        <receiver android:name="com.cyanogenmod.updater.receiver.DownloadCompletedReceiver">
+        <receiver android:name="org.chameleonos.updater.receiver.DownloadCompletedReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.DOWNLOAD_COMPLETE"/>
                 <category android:name="android.intent.category.HOME"/>
             </intent-filter>
         </receiver>
 
-        <receiver android:name="com.cyanogenmod.updater.receiver.NotificationClickReceiver">
+        <receiver android:name="org.chameleonos.updater.receiver.NotificationClickReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.DOWNLOAD_NOTIFICATION_CLICKED"/>
                 <category android:name="android.intent.category.HOME"/>

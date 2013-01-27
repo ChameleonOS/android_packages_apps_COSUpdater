@@ -9,7 +9,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
     <!-- General strings -->
-    <string name="app_name">CMアップデータ</string>
+    <string name="app_name">ChaOSアップデータ</string>
     <string name="unknown">不明</string>
 
     <!-- Menu and dialog box strings -->
