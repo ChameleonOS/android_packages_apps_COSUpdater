@@ -8,7 +8,7 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <!-- ChaOSUpdate Config Strings -->
-    <string name="conf_update_server_url_def" translatable="false">http://roms.chameleonos.org/api</string>
+    <string name="conf_update_server_url_def" translatable="false">http://roms.chameleonos.org/api.php</string>
     <string name="conf_changelog_url" translatable="false">http://localhost/changelog.xml</string>
     <bool name="alternateIsInternal">false</bool>
 </resources>

@@ -33,6 +33,7 @@ public class Constants {
     public static final String JSON_TIMESTAMP = "timestamp";
     public static final String JSON_URL = "url";
     public static final String JSON_DESCRIPTION = "description";
+    public static final String JSON_VERSION = "version";
     public static final String JSON_BRANCH = "channel";
     public static final String JSON_FILENAME = "filename";
     public static final String JSON_MD5SUM = "md5sum";

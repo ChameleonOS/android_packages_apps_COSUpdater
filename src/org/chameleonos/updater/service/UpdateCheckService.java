@@ -211,7 +211,7 @@ public class UpdateCheckService extends Service {
 
             // Get the notification ready
             Notification.Builder builder = new Notification.Builder(this);
-            builder.setSmallIcon(R.drawable.cm_updater);
+            builder.setSmallIcon(R.drawable.chaos_updater);
             builder.setWhen(System.currentTimeMillis());
             builder.setTicker(res.getString(R.string.not_new_updates_found_ticker));
 
@@ -267,8 +267,9 @@ public class UpdateCheckService extends Service {
             PackageManager manager = this.getPackageManager();
             URI RomUpdateServerUri = URI.create(getResources().getString(R.string.conf_update_server_url_def));
             HttpPost romReq = new HttpPost(RomUpdateServerUri);
-            String getcmRequest = "{\"method\": \"get_all_builds\", \"params\":{\"device\":\""+mSystemMod+"\", \"channels\": [\"nightly\",\"stable\",\"snapshot\"]}}";
-            romReq.setEntity(new ByteArrayEntity(getcmRequest.getBytes()));
+            String getChaosRequest = "{\"method\": \"get_all_builds\", \"params\":{\"device\":\""+mSystemMod+"\", " +
+                    "\"channels\": [\"nightly\",\"stable\",\"beta\",\"experimental\"]}}";
+            romReq.setEntity(new ByteArrayEntity(getChaosRequest.getBytes()));
 
             // Set the request headers
             romReq.addHeader("Cache-Control", "no-cache");
@@ -297,7 +298,8 @@ public class UpdateCheckService extends Service {
         try {
             if (!romException) {
                 // Read the ROM Infos
-                BufferedReader romLineReader = new BufferedReader(new InputStreamReader(romResponseEntity.getContent()), 2 * 1024);
+                BufferedReader romLineReader = new BufferedReader(
+                        new InputStreamReader(romResponseEntity.getContent()), 2 * 1024);
                 StringBuffer romBuf = new StringBuffer();
                 String romLine;
                 while ((romLine = romLineReader.readLine()) != null) {
@@ -345,13 +347,12 @@ public class UpdateCheckService extends Service {
         UpdateInfo ui = new UpdateInfo();
         try {
             ui.setName(obj.getString(Constants.JSON_FILENAME).trim());
-            ui.setVersion(obj.getString(Constants.JSON_FILENAME).trim());
+            ui.setVersion(obj.getString(Constants.JSON_VERSION).trim());
             ui.setDate(obj.getString(Constants.JSON_TIMESTAMP).trim());
             ui.setDownloadUrl(obj.getString(Constants.JSON_URL).trim());
             ui.setMD5(obj.getString(Constants.JSON_MD5SUM).trim());
             ui.setBranchCode(obj.getString(Constants.JSON_BRANCH).trim());
             ui.setFileName(obj.getString(Constants.JSON_FILENAME).trim());
-            ui.setChanges(returnFullChangeLog(obj.getString(Constants.JSON_CHANGES)));
             ui.setChangelogUrl(obj.getString(Constants.JSON_CHANGES));
 
         } catch (JSONException e) {
@@ -444,6 +445,9 @@ public class UpdateCheckService extends Service {
             UpdateInfo ui = updateInfos.poll();
             if (mShowAllRomUpdates || StringUtils.compareVersions(ui.getVersion(), mSystemRom,ui.getDate(),mCurrentBuildDate)) {
                 if (branchMatches(ui, mShowNightlyRomUpdates)) {
+                    if (ui.getChanges() == null && ui.getChangelogUrl() != null) {
+                        ui.setChanges(returnFullChangeLog(ui.getChangelogUrl()));
+                    }
                     ret.add(ui);
                 }
             }

@@ -42,9 +42,11 @@ public class StringUtils {
      * false on exceptions or newVersion=oldVersion and newVersion is lower then oldVersion
      */
     public static boolean compareVersions(String newVersion, String oldVersion, Integer newDate, Integer oldDate) {
-        //Replace all - by . So a CyanogenMod-4.5.4-r2 will be a CyanogenMod.4.5.4.r2 
+        //Replace all -/_ by .
         newVersion = newVersion.replaceAll("-", "\\.");
         oldVersion = oldVersion.replaceAll("-", "\\.");
+        newVersion = newVersion.replaceAll("_", "\\.");
+        oldVersion = oldVersion.replaceAll("_", "\\.");
 
         String[] sNewVersion = newVersion.split("\\.");
         String[] sOldVersion = oldVersion.split("\\.");

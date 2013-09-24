@@ -341,7 +341,6 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
                 // stripped off when the download completes
                 String fullFilePath = "file://" + fullFolderPath + "/" + ui.getFileName() + ".partial";
                 Request request = new Request(Uri.parse(ui.getDownloadUrl()));
-                request.addRequestHeader("Cache-Control", "no-cache");
                 try {
                     PackageInfo pinfo = manager.getPackageInfo(this.getPackageName(), 0);
                     request.addRequestHeader("User-Agent", pinfo.packageName + "/" + pinfo.versionName);
@@ -593,6 +592,8 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
     }
 
     private void writeLogFile(String filename, String log) {
+        if (log == null)
+            return;
         File logFile = new File(mUpdateFolder + "/" + filename + ".changelog");
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter(logFile));
