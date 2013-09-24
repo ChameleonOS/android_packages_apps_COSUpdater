@@ -91,6 +91,7 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
 
     private PreferenceCategory mUpdatesList;
     private UpdatePreference mDownloadingPreference;
+    private Integer mCurrentBuildDate;
 
     private File mUpdateFolder;
     private ArrayList<UpdateInfo> mServerUpdates;
@@ -148,6 +149,8 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
         // Initialize the arrays
         mServerUpdates = new ArrayList<UpdateInfo>();
         mLocalUpdates = new ArrayList<UpdateInfo>();
+
+        mCurrentBuildDate = Integer.valueOf(SysUtils.getSystemProperty(Customization.BUILD_DATE));
 
         // Determine if there are any in-progress downloads
         mDownloadManager = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
@@ -660,6 +663,7 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
                     // Create a more user friendly title by stripping of the '-device.zip' at the end
                     String title = ui.getFileName().replace("-" + mSystemMod + ".zip", "");
                     UpdatePreference up = new UpdatePreference(this, ui, title, ui.getFileName().equals(installedZip)
+                            || (ui.getFileName().contains("incremental") && isOldIncremental(ui.getFileName()))
                             ? UpdatePreference.STYLE_INSTALLED : UpdatePreference.STYLE_DOWNLOADED);
                     up.setKey(ui.getFileName());
 
@@ -676,6 +680,16 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
                 npref.setEnabled(false);
                 mUpdatesList.addPreference(npref);
             }
+        }
+    }
+
+    private boolean isOldIncremental(String fileName) {
+        String date = fileName.substring(fileName.lastIndexOf('-') + 1, fileName.indexOf('.'));
+        try {
+            int newDate = Integer.parseInt(date);
+            return newDate < mCurrentBuildDate;
+        } catch (NumberFormatException e) {
+            return false;
         }
     }
 

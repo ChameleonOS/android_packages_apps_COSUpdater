@@ -268,7 +268,7 @@ public class UpdateCheckService extends Service {
             URI RomUpdateServerUri = URI.create(getResources().getString(R.string.conf_update_server_url_def));
             HttpPost romReq = new HttpPost(RomUpdateServerUri);
             String getChaosRequest = "{\"method\": \"get_all_builds\", \"params\":{\"device\":\""+mSystemMod+"\", " +
-                    "\"channels\": [\"nightly\",\"stable\",\"beta\",\"experimental\"]}}";
+                    "\"build_date\":"+mCurrentBuildDate+ ", \"channels\": [\"nightly\",\"stable\",\"beta\",\"experimental\"]}}";
             romReq.setEntity(new ByteArrayEntity(getChaosRequest.getBytes()));
 
             // Set the request headers
